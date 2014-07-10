@@ -57,7 +57,7 @@ public class MusicPlayService extends Service implements MediaPlayer.OnCompletio
 
     @Override
     public boolean onUnbind(Intent intent) {
-        if(mPlayer != null) {
+        if (mPlayer != null) {
             stop();
             mPlayer.release();
             mPlayer = null;
@@ -81,8 +81,8 @@ public class MusicPlayService extends Service implements MediaPlayer.OnCompletio
             @Override
             public void run() {
                 if (mPlayer.isPlaying()) {
-                    for(OnPlayListener listener : mOnPlayListener) {
-                        if(listener != null) {
+                    for (OnPlayListener listener : mOnPlayListener) {
+                        if (listener != null) {
                             listener.onPlay(getProgress(), getDuration());
                         }
                     }
@@ -91,11 +91,11 @@ public class MusicPlayService extends Service implements MediaPlayer.OnCompletio
             }
         };
 
-        TelephonyManager teleManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        TelephonyManager teleManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         teleManager.listen(new CyclePhoneListener(), PhoneStateListener.LISTEN_CALL_STATE);
 
         setNotification();
-        NotificationManager notiManager =  (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notiManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notiManager.cancel(this.getClass().getName().hashCode());
         refreshNotification();
     }
@@ -106,11 +106,11 @@ public class MusicPlayService extends Service implements MediaPlayer.OnCompletio
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if(mPlayer == null) {
+        if (mPlayer == null) {
             stopSelf();
         } else {
             try {
-                int cmd = intent.getIntExtra("CMD",-1);
+                int cmd = intent.getIntExtra("CMD", -1);
                 switch (cmd) {
                     case CMD_PREV:
                         Func.ChangeChapter(false);
@@ -121,7 +121,7 @@ public class MusicPlayService extends Service implements MediaPlayer.OnCompletio
                         Func.ChangeChapter(true);
                         break;
                 }
-                if(cmd != -1) {
+                if (cmd != -1) {
                     final File file = Func.getFilePath(Para.mp3Ver, Func.getFileName(Para.currentBook, Para.currentChapter));
                     if (file.exists()) {
                         play(Para.mp3Ver, Para.currentBook, Para.currentChapter);
@@ -140,23 +140,23 @@ public class MusicPlayService extends Service implements MediaPlayer.OnCompletio
 
     private void setNotification() {
         Intent prevIntent = new Intent();
-        prevIntent.setClass(this,MusicPlayService.class);
-        prevIntent.putExtra("CMD",CMD_PREV);
+        prevIntent.setClass(this, MusicPlayService.class);
+        prevIntent.putExtra("CMD", CMD_PREV);
 
         Intent playIntent = new Intent();
-        playIntent.setClass(this,MusicPlayService.class);
-        playIntent.putExtra("CMD",CMD_PLAY);
+        playIntent.setClass(this, MusicPlayService.class);
+        playIntent.putExtra("CMD", CMD_PLAY);
 
         Intent nextIntent = new Intent();
-        nextIntent.setClass(this,MusicPlayService.class);
-        nextIntent.putExtra("CMD",CMD_NEXT);
+        nextIntent.setClass(this, MusicPlayService.class);
+        nextIntent.putExtra("CMD", CMD_NEXT);
 
         Intent appIntent = new Intent();
         appIntent.setClass(this, MainActivity.class);
 
         final int sdkVersion = Build.VERSION.SDK_INT;
         if (sdkVersion >= Build.VERSION_CODES.HONEYCOMB) {
-            mRemote = new Remote(this.getPackageName(),R.layout.mp3_notification);
+            mRemote = new Remote(this.getPackageName(), R.layout.mp3_notification);
             mRemote.setOnClickPendingIntent(R.id.noti_prev, PendingIntent
                     .getService(this, 0, prevIntent, PendingIntent.FLAG_UPDATE_CURRENT));
             mRemote.setOnClickPendingIntent(R.id.noti_play, PendingIntent
@@ -171,7 +171,7 @@ public class MusicPlayService extends Service implements MediaPlayer.OnCompletio
             mNotification.flags |= Notification.FLAG_ONGOING_EVENT;
             mNotification.contentView = mRemote;
         } else {
-            mRemote = new Remote(this.getPackageName(),R.layout.mp3_notification_old);
+            mRemote = new Remote(this.getPackageName(), R.layout.mp3_notification_old);
 
             mNotification = new Notification();
             mNotification.icon = R.drawable.ic_launcher;
@@ -181,16 +181,9 @@ public class MusicPlayService extends Service implements MediaPlayer.OnCompletio
         }
     }
 
-    private class Remote extends RemoteViews {
-
-        public Remote(String packageName, int layoutId) {
-            super(packageName, layoutId);
-        }
-    }
-
     @Override
     public void onDestroy() {
-        if(mPlayer != null) {
+        if (mPlayer != null) {
             stop();
             mPlayer.release();
             mPlayer = null;
@@ -200,7 +193,7 @@ public class MusicPlayService extends Service implements MediaPlayer.OnCompletio
     }
 
     public void playNet(int type, int book, int chapter) {
-        mName = VerseInfo.CHN_NAME[book]+"第"+chapter+"章";
+        mName = VerseInfo.CHN_NAME[book] + "第" + chapter + "章";
         String file = Func.getUrlPath(type, Func.getUrlName(book, chapter));
         if (mLast.equals(type + "/" + book + "/" + chapter) && getProgress() < getDuration()) {            //同一首
             if (mPlayer.isPlaying()) {           //在播放
@@ -225,7 +218,7 @@ public class MusicPlayService extends Service implements MediaPlayer.OnCompletio
     }
 
     public void play(int type, int book, int chapter) {
-        mName = VerseInfo.CHN_NAME[book]+"第"+chapter+"章";
+        mName = VerseInfo.CHN_NAME[book] + "第" + chapter + "章";
         String file = Func.getFilePath(type, Func.getFileName(book, chapter)).getAbsolutePath();
         if (mLast.equals(type + "/" + book + "/" + chapter) && getProgress() < getDuration()) {            //同一首
             if (mPlayer.isPlaying()) {           //在播放
@@ -255,8 +248,8 @@ public class MusicPlayService extends Service implements MediaPlayer.OnCompletio
         mRemote.setTextViewText(R.id.noti_name, mName);
         mRemote.setImageViewResource(R.id.noti_play, R.drawable.icon_pause);
         refreshNotification();
-        for(OnPlayChangedListener listener : mOnPlayChangedListener) {
-            if(listener != null) {
+        for (OnPlayChangedListener listener : mOnPlayChangedListener) {
+            if (listener != null) {
                 listener.onPlayChanged(true);
             }
         }
@@ -269,8 +262,8 @@ public class MusicPlayService extends Service implements MediaPlayer.OnCompletio
         mRemote.setTextViewText(R.id.noti_name, mName);
         mRemote.setImageViewResource(R.id.noti_play, R.drawable.icon_play);
         refreshNotification();
-        for(OnPlayChangedListener listener : mOnPlayChangedListener) {
-            if(listener != null) {
+        for (OnPlayChangedListener listener : mOnPlayChangedListener) {
+            if (listener != null) {
                 listener.onPlayChanged(false);
             }
         }
@@ -282,8 +275,8 @@ public class MusicPlayService extends Service implements MediaPlayer.OnCompletio
         mRemote.setTextViewText(R.id.noti_name, mName);
         mRemote.setImageViewResource(R.id.noti_play, R.drawable.icon_play);
         refreshNotification();
-        for(OnPlayChangedListener listener : mOnPlayChangedListener) {
-            if(listener != null) {
+        for (OnPlayChangedListener listener : mOnPlayChangedListener) {
+            if (listener != null) {
                 listener.onPlayChanged(false);
             }
         }
@@ -323,8 +316,8 @@ public class MusicPlayService extends Service implements MediaPlayer.OnCompletio
                 Func.downChapter(Para.mp3Ver, Para.currentBook, Para.currentChapter);
             }
         }
-        for(OnCompletionListener listener : mOnCompletionListener) {
-            if(listener != null) {
+        for (OnCompletionListener listener : mOnCompletionListener) {
+            if (listener != null) {
                 listener.onCompletion();
             }
         }
@@ -359,6 +352,13 @@ public class MusicPlayService extends Service implements MediaPlayer.OnCompletio
         void onPlayChanged(boolean isPlay);
     }
 
+    private class Remote extends RemoteViews {
+
+        public Remote(String packageName, int layoutId) {
+            super(packageName, layoutId);
+        }
+    }
+
     public class MusicPlayBinder extends Binder {
         public MusicPlayService getService() {
             return MusicPlayService.this;
@@ -368,17 +368,17 @@ public class MusicPlayService extends Service implements MediaPlayer.OnCompletio
     private final class CyclePhoneListener extends PhoneStateListener {
         @Override
         public void onCallStateChanged(int state, String incomingNumber) {
-            if(mPlayer != null) {
+            if (mPlayer != null) {
                 switch (state) {
                     case TelephonyManager.CALL_STATE_RINGING:
                     case TelephonyManager.CALL_STATE_OFFHOOK:
                         mCallPlay = mPlayer.isPlaying();
-                        if(mCallPlay){
+                        if (mCallPlay) {
                             pause();
                         }
                         break;
                     case TelephonyManager.CALL_STATE_IDLE:
-                        if(mCallPlay){
+                        if (mCallPlay) {
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {

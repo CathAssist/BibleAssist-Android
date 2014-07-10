@@ -167,10 +167,10 @@ public class PathManageActivity extends SherlockActivity implements AdapterView.
                 dialog.dismiss();
             }
             mAdapter.notifyDataSetChanged();
-            if(result) {
-                Toast.makeText(PathManageActivity.this,"数据迁移完成",Toast.LENGTH_SHORT).show();
+            if (result) {
+                Toast.makeText(PathManageActivity.this, "数据迁移完成", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(PathManageActivity.this,"数据迁移失败，请尝试手动迁移",Toast.LENGTH_SHORT).show();
+                Toast.makeText(PathManageActivity.this, "数据迁移失败，请尝试手动迁移", Toast.LENGTH_SHORT).show();
             }
         }
 

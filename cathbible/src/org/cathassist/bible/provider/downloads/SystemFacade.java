@@ -1,4 +1,3 @@
-
 package org.cathassist.bible.provider.downloads;
 
 import android.app.Notification;

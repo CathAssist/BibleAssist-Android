@@ -1,7 +1,6 @@
 package org.cathassist.bible.lib;
 
 import android.graphics.Color;
-import android.os.Environment;
 
 import org.cathassist.bible.R;
 import org.cathassist.bible.music.MusicPlayService;

@@ -12,12 +12,6 @@ import android.preference.PreferenceScreen;
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.umeng.fb.FeedbackAgent;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.bean.SocializeConfig;
-import com.umeng.socialize.common.SocializeConstants;
-import com.umeng.socialize.controller.RequestType;
-import com.umeng.socialize.controller.UMServiceFactory;
-import com.umeng.socialize.controller.UMSocialService;
 
 import org.cathassist.bible.App;
 import org.cathassist.bible.MainActivity;
@@ -101,9 +95,9 @@ public class SettingActivity extends SherlockPreferenceActivity implements OnPre
         } else if (preference == click_feedback) {
             FeedbackAgent agent = new FeedbackAgent(this);
             agent.startFeedbackActivity();
-        //} else if (preference == click_share) {
-        //    final UMSocialService mController = UMServiceFactory.getUMSocialService("user", RequestType.SOCIAL);
-        //    mController.openUserCenter(this, SocializeConstants.FLAG_USER_CENTER_HIDE_SNSINFO);
+            //} else if (preference == click_share) {
+            //    final UMSocialService mController = UMServiceFactory.getUMSocialService("user", RequestType.SOCIAL);
+            //    mController.openUserCenter(this, SocializeConstants.FLAG_USER_CENTER_HIDE_SNSINFO);
         } else if (preference == click_mp3_manage) {
             Intent intent = new Intent();
             intent.setClass(this, Mp3ManageActivity.class);

@@ -15,21 +15,20 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.MenuItem;
-
-import org.cathassist.bible.lib.FragmentManager;
-import org.cathassist.bible.lib.Func;
-import org.cathassist.bible.lib.Para;
-import org.cathassist.bible.music.MusicPlayService;
-
-import org.cathassist.bible.provider.DownloadManager;
-import org.cathassist.bible.provider.downloads.DownloadService;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.FeedbackAgent;
 import com.umeng.update.UmengUpdateAgent;
 
-public class MainActivity extends SlidingFragmentActivity implements ServiceConnection{
+import org.cathassist.bible.lib.FragmentManager;
+import org.cathassist.bible.lib.Func;
+import org.cathassist.bible.lib.Para;
+import org.cathassist.bible.music.MusicPlayService;
+import org.cathassist.bible.provider.DownloadManager;
+import org.cathassist.bible.provider.downloads.DownloadService;
+
+public class MainActivity extends SlidingFragmentActivity implements ServiceConnection {
     private long mExitTime = 0;
     private ActionBar mActionBar;
     private MusicPlayService mMusicPlayService;
@@ -57,7 +56,7 @@ public class MainActivity extends SlidingFragmentActivity implements ServiceConn
 
         Intent intent = getIntent();
         SherlockFragment fragment;
-        if("BIBLE_READ_FRAGMENT".equals(intent.getAction())) {
+        if ("BIBLE_READ_FRAGMENT".equals(intent.getAction())) {
             fragment = FragmentManager.bibleReadFragment;
         } else {
             fragment = FragmentManager.homeFragment;
@@ -104,7 +103,7 @@ public class MainActivity extends SlidingFragmentActivity implements ServiceConn
         editor.putInt("currentSection", Para.currentSection);
         editor.commit();
 
-        if(mMusicPlayService != null) {
+        if (mMusicPlayService != null) {
             unbindMusicPlayService();
         }
         Intent intent = new Intent();
@@ -195,7 +194,7 @@ public class MainActivity extends SlidingFragmentActivity implements ServiceConn
 
     @Override
     public void onServiceConnected(ComponentName name, IBinder service) {
-        mMusicPlayService = ((MusicPlayService.MusicPlayBinder)service).getService();
+        mMusicPlayService = ((MusicPlayService.MusicPlayBinder) service).getService();
     }
 
     @Override

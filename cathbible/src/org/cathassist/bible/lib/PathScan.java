@@ -1,7 +1,5 @@
 package org.cathassist.bible.lib;
 
-import android.os.Build;
-import android.os.Environment;
 import android.os.StatFs;
 
 import java.io.File;
@@ -149,9 +147,9 @@ public class PathScan {
          */
         //Constants.mMounts = new ArrayList<String>();
         mLabels = new ArrayList<String>();
-        for(String s:mMounts) {
+        for (String s : mMounts) {
             StatFs stat = new StatFs(s);
-            mLabels.add(String.valueOf((long)stat.getAvailableBlocks() * stat.getBlockSize() /1024/1024));
+            mLabels.add(String.valueOf((long) stat.getAvailableBlocks() * stat.getBlockSize() / 1024 / 1024));
         }
 
         /*

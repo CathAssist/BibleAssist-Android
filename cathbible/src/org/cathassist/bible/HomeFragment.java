@@ -21,12 +21,8 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.slidingmenu.lib.SlidingMenu;
-import com.umeng.socialize.controller.RequestType;
-import com.umeng.socialize.controller.UMServiceFactory;
-import com.umeng.socialize.controller.UMSocialService;
 
 import org.cathassist.bible.lib.Database;
-import org.cathassist.bible.lib.Func;
 import org.cathassist.bible.lib.Para;
 import org.cathassist.bible.lib.Share;
 import org.cathassist.bible.lib.VerseInfo;
@@ -92,7 +88,7 @@ public class HomeFragment extends SherlockFragment implements OnClickListener {
             mSlide.setVisibility(View.VISIBLE);
         }
         File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/cathbible/bible/mp3/chn");
-        if(file.exists()) {
+        if (file.exists()) {
             File newFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/cathbible/bible/mp3/chn_female");
             file.renameTo(newFile);
         }

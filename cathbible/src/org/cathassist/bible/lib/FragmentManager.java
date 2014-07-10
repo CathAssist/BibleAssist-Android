@@ -1,9 +1,9 @@
 package org.cathassist.bible.lib;
 
 import org.cathassist.bible.HomeFragment;
-import org.cathassist.bible.mark.MarkFragment;
 import org.cathassist.bible.SearchFragment;
 import org.cathassist.bible.VerseFragment;
+import org.cathassist.bible.mark.MarkFragment;
 import org.cathassist.bible.read.BibleReadFragment;
 
 public class FragmentManager {

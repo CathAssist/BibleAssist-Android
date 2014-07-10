@@ -16,33 +16,25 @@
 
 package org.cathassist.bible.provider.downloads.ui;
 
-import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
-
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.text.format.Formatter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CursorAdapter;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.cathassist.bible.R;
 import org.cathassist.bible.provider.DownloadManager;
 import org.cathassist.bible.provider.downloads.ui.DownloadItem.DownloadSelectListener;
+
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * List adapter for Cursors returned by {@link DownloadManager}.
@@ -90,15 +82,6 @@ public class DownloadAdapter extends CursorAdapter {
                 .getColumnIndexOrThrow(DownloadManager.COLUMN_LAST_MODIFIED_TIMESTAMP);
     }
 
-    private static class ViewHolder{
-        TextView title;
-        TextView down;
-        TextView size;
-        TextView status;
-        TextView date;
-        CheckBox checkBox;
-    }
-
     public View newView() {
         ViewHolder vh = new ViewHolder();
         DownloadItem view = (DownloadItem) LayoutInflater.from(mContext)
@@ -118,7 +101,7 @@ public class DownloadAdapter extends CursorAdapter {
         if (!(convertView instanceof DownloadItem)) {
             return;
         }
-        ViewHolder vh  = (ViewHolder)convertView.getTag();
+        ViewHolder vh = (ViewHolder) convertView.getTag();
         long downloadId = mCursor.getLong(mIdColumnId);
         ((DownloadItem) convertView).setDownloadId(downloadId);
 
@@ -143,9 +126,9 @@ public class DownloadAdapter extends CursorAdapter {
         vh.checkBox.setChecked(mDownloadSelectionListener
                 .isDownloadSelected(downloadId));
 
-        if(status == DownloadManager.STATUS_FAILED) {
+        if (status == DownloadManager.STATUS_FAILED) {
             vh.status.setTextColor(mResources.getColor(R.color.red));
-        } else if(status == DownloadManager.STATUS_PAUSED) {
+        } else if (status == DownloadManager.STATUS_PAUSED) {
             vh.status.setTextColor(mResources.getColor(R.color.green));
         } else {
             vh.status.setTextColor(vh.title.getCurrentTextColor());
@@ -213,15 +196,24 @@ public class DownloadAdapter extends CursorAdapter {
         view.setText(text);
     }
 
-    // CursorAdapter overrides
-
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         return newView();
     }
 
+    // CursorAdapter overrides
+
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         bindView(view);
+    }
+
+    private static class ViewHolder {
+        TextView title;
+        TextView down;
+        TextView size;
+        TextView status;
+        TextView date;
+        CheckBox checkBox;
     }
 }

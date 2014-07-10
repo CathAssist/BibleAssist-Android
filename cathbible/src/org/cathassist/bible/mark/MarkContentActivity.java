@@ -13,8 +13,8 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
 import org.cathassist.bible.R;
-import org.cathassist.bible.lib.Para;
 import org.cathassist.bible.lib.Database;
+import org.cathassist.bible.lib.Para;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -56,8 +56,7 @@ public class MarkContentActivity extends SherlockActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId())
-        {
+        switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;

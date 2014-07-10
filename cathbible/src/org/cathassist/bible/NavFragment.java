@@ -16,11 +16,10 @@ import android.widget.SimpleAdapter;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
-import org.cathassist.bible.lib.Para;
-import org.cathassist.bible.read.BibleReadFragment;
-import org.cathassist.bible.setting.SettingActivity;
-
 import com.slidingmenu.lib.SlidingMenu;
+
+import org.cathassist.bible.lib.Para;
+import org.cathassist.bible.setting.SettingActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;

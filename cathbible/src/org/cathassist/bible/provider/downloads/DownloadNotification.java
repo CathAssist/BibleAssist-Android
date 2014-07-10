@@ -16,9 +16,6 @@
 
 package org.cathassist.bible.provider.downloads;
 
-import java.util.Collection;
-import java.util.HashMap;
-
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.ContentUris;
@@ -28,10 +25,11 @@ import android.net.Uri;
 import android.view.View;
 import android.widget.RemoteViews;
 
+import org.cathassist.bible.R;
 import org.cathassist.bible.provider.downloads.ui.DownloadList;
 
-import org.cathassist.bible.MainActivity;
-import org.cathassist.bible.R;
+import java.util.Collection;
+import java.util.HashMap;
 
 
 /**
@@ -39,64 +37,29 @@ import org.cathassist.bible.R;
  * cases where there is an ongoing download. Once the download is complete
  * (be it successful or unsuccessful) it is no longer the responsibility
  * of this component to show the download in the notification manager.
- *
  */
 class DownloadNotification {
 
-    Context mContext;
-    HashMap <String, NotificationItem> mNotifications;
-    private SystemFacade mSystemFacade;
-
     static final String LOGTAG = "DownloadNotification";
     static final String WHERE_RUNNING =
-        "(" + Downloads.COLUMN_STATUS + " >= '100') AND (" +
-        Downloads.COLUMN_STATUS + " <= '199') AND (" +
-        Downloads.COLUMN_VISIBILITY + " IS NULL OR " +
-        Downloads.COLUMN_VISIBILITY + " == '" + Downloads.VISIBILITY_VISIBLE + "' OR " +
-        Downloads.COLUMN_VISIBILITY +
-            " == '" + Downloads.VISIBILITY_VISIBLE_NOTIFY_COMPLETED + "')";
+            "(" + Downloads.COLUMN_STATUS + " >= '100') AND (" +
+                    Downloads.COLUMN_STATUS + " <= '199') AND (" +
+                    Downloads.COLUMN_VISIBILITY + " IS NULL OR " +
+                    Downloads.COLUMN_VISIBILITY + " == '" + Downloads.VISIBILITY_VISIBLE + "' OR " +
+                    Downloads.COLUMN_VISIBILITY +
+                    " == '" + Downloads.VISIBILITY_VISIBLE_NOTIFY_COMPLETED + "')";
     static final String WHERE_COMPLETED =
-        Downloads.COLUMN_STATUS + " >= '200' AND " +
-        Downloads.COLUMN_VISIBILITY +
-            " == '" + Downloads.VISIBILITY_VISIBLE_NOTIFY_COMPLETED + "'";
-
-
-    /**
-     * This inner class is used to collate downloads that are owned by
-     * the same application. This is so that only one notification line
-     * item is used for all downloads of a given application.
-     *
-     */
-    static class NotificationItem {
-        int mId;  // This first db _id for the download for the app
-        long mTotalCurrent = 0;
-        long mTotalTotal = 0;
-        int mTitleCount = 0;
-        String mPackageName;  // App package name
-        String mDescription;
-        String[] mTitles = new String[2]; // download titles.
-        String mPausedText = null;
-
-        /*
-         * Add a second download to this notification item.
-         */
-        void addItem(String title, long currentBytes, long totalBytes) {
-            mTotalCurrent += currentBytes;
-            if (totalBytes <= 0 || mTotalTotal == -1) {
-                mTotalTotal = -1;
-            } else {
-                mTotalTotal += totalBytes;
-            }
-            if (mTitleCount < 2) {
-                mTitles[mTitleCount] = title;
-            }
-            mTitleCount++;
-        }
-    }
+            Downloads.COLUMN_STATUS + " >= '200' AND " +
+                    Downloads.COLUMN_VISIBILITY +
+                    " == '" + Downloads.VISIBILITY_VISIBLE_NOTIFY_COMPLETED + "'";
+    Context mContext;
+    HashMap<String, NotificationItem> mNotifications;
+    private SystemFacade mSystemFacade;
 
 
     /**
      * Constructor
+     *
      * @param ctx The context to use to obtain access to the
      *            Notification Service
      */
@@ -174,7 +137,7 @@ class DownloadNotification {
                 n.number = item.mTitleCount;
                 if (item.mTitleCount > 2) {
                     title.append(mContext.getString(R.string.notification_filename_extras,
-                            new Object[] { Integer.valueOf(item.mTitleCount - 2) }));
+                            new Object[]{Integer.valueOf(item.mTitleCount - 2)}));
                 }
             } else {
                 expandedView.setTextViewText(R.id.description,
@@ -233,7 +196,7 @@ class DownloadNotification {
                         R.string.download_unknown_title);
             }
             Uri contentUri =
-                ContentUris.withAppendedId(Downloads.ALL_DOWNLOADS_CONTENT_URI, id);
+                    ContentUris.withAppendedId(Downloads.ALL_DOWNLOADS_CONTENT_URI, id);
             String caption;
             Intent intent;
             if (Downloads.isStatusError(download.mStatus)) {
@@ -289,6 +252,38 @@ class DownloadNotification {
         sb.append(progress);
         sb.append('%');
         return sb.toString();
+    }
+
+    /**
+     * This inner class is used to collate downloads that are owned by
+     * the same application. This is so that only one notification line
+     * item is used for all downloads of a given application.
+     */
+    static class NotificationItem {
+        int mId;  // This first db _id for the download for the app
+        long mTotalCurrent = 0;
+        long mTotalTotal = 0;
+        int mTitleCount = 0;
+        String mPackageName;  // App package name
+        String mDescription;
+        String[] mTitles = new String[2]; // download titles.
+        String mPausedText = null;
+
+        /*
+         * Add a second download to this notification item.
+         */
+        void addItem(String title, long currentBytes, long totalBytes) {
+            mTotalCurrent += currentBytes;
+            if (totalBytes <= 0 || mTotalTotal == -1) {
+                mTotalTotal = -1;
+            } else {
+                mTotalTotal += totalBytes;
+            }
+            if (mTitleCount < 2) {
+                mTitles[mTitleCount] = title;
+            }
+            mTitleCount++;
+        }
     }
 
 }

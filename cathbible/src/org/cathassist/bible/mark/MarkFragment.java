@@ -1,33 +1,26 @@
 package org.cathassist.bible.mark;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.text.TextPaint;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
+import com.slidingmenu.lib.SlidingMenu;
 
 import org.cathassist.bible.MainActivity;
 import org.cathassist.bible.R;
-import org.cathassist.bible.lib.Para;
 import org.cathassist.bible.lib.Database;
-import org.cathassist.bible.read.BibleReadFragment;
-
-import com.slidingmenu.lib.SlidingMenu;
+import org.cathassist.bible.lib.Para;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -128,7 +121,7 @@ public class MarkFragment extends SherlockFragment implements OnItemClickListene
                 map.put("chapter", cursor.getString(cursor.getColumnIndex("chapter")));
                 map.put("section", cursor.getString(cursor.getColumnIndex("section")));
                 map.put("title", cursor.getString(cursor.getColumnIndex("title")));
-                if(Integer.valueOf(map.get("section")) > 1000) {
+                if (Integer.valueOf(map.get("section")) > 1000) {
                     map.put("content", bookName + " " +
                             cursor.getInt(cursor.getColumnIndex("chapter")));
                 } else {

@@ -17,14 +17,14 @@
 
 package org.cathassist.bible.provider.downloads.ui;
 
-import org.cathassist.bible.provider.DownloadManager;
-import org.cathassist.bible.provider.downloads.ui.DownloadItem.DownloadSelectListener;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+
+import org.cathassist.bible.provider.DownloadManager;
+import org.cathassist.bible.provider.downloads.ui.DownloadItem.DownloadSelectListener;
 
 /**
  * Adapter for a date-sorted list of downloads.  Delegates all the real work to
@@ -34,7 +34,7 @@ public class DateSortedDownloadAdapter extends DateSortedExpandableListAdapter {
     private DownloadAdapter mDelegate;
 
     public DateSortedDownloadAdapter(Context context, Cursor cursor,
-            DownloadSelectListener selectionListener) {
+                                     DownloadSelectListener selectionListener) {
         super(context, cursor,
                 cursor.getColumnIndexOrThrow(DownloadManager.COLUMN_LAST_MODIFIED_TIMESTAMP));
         mDelegate = new DownloadAdapter(context, cursor, selectionListener);
@@ -42,7 +42,7 @@ public class DateSortedDownloadAdapter extends DateSortedExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition,
-                boolean isLastChild, View convertView, ViewGroup parent) {
+                             boolean isLastChild, View convertView, ViewGroup parent) {
         // The layout file uses a RelativeLayout, whereas the GroupViews use TextView.
         if (null == convertView || !(convertView instanceof RelativeLayout)) {
             convertView = mDelegate.newView();

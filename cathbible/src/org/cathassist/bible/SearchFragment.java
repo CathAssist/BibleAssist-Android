@@ -23,15 +23,14 @@ import android.widget.Spinner;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
-import org.cathassist.bible.lib.Para;
-import org.cathassist.bible.lib.Database;
-import org.cathassist.bible.lib.VerseInfo;
-import org.cathassist.bible.read.BibleReadFragment;
-
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.slidingmenu.lib.SlidingMenu;
+
+import org.cathassist.bible.lib.Database;
+import org.cathassist.bible.lib.Para;
+import org.cathassist.bible.lib.VerseInfo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,7 +72,7 @@ public class SearchFragment extends SherlockFragment implements OnClickListener,
         button_search.setOnClickListener(this);
         list_search.setOnItemClickListener(this);
 
-        mSpinner = (Spinner)view.findViewById(R.id.spinner);
+        mSpinner = (Spinner) view.findViewById(R.id.spinner);
         mScopeAdapter = new ArrayAdapter<String>(getSherlockActivity(),
                 R.layout.sherlock_spinner_item,
                 VerseInfo.BOOK_SCOPE);
@@ -123,9 +122,9 @@ public class SearchFragment extends SherlockFragment implements OnClickListener,
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
-        inflater.inflate(R.menu.search_menu,menu);
+        inflater.inflate(R.menu.search_menu, menu);
         MenuItem count = menu.findItem(R.id.search_count);
-        count.setTitle(mCount==-1?"正在搜索":"搜索到"+mCount+"条");
+        count.setTitle(mCount == -1 ? "正在搜索" : "搜索到" + mCount + "条");
     }
 
     @Override
@@ -202,8 +201,8 @@ public class SearchFragment extends SherlockFragment implements OnClickListener,
 
                     String bookName = VerseInfo.CHN_ABBR[book];
                     bookName += cursor.getInt(cursor.getColumnIndex("chapter"));
-                    if(cursor.getInt(cursor.getColumnIndex("section")) <= 1000) {
-                        bookName += ":\n"+ cursor.getInt(cursor.getColumnIndex("section"));
+                    if (cursor.getInt(cursor.getColumnIndex("section")) <= 1000) {
+                        bookName += ":\n" + cursor.getInt(cursor.getColumnIndex("section"));
                     }
                     String content = cursor.getString(cursor.getColumnIndex("chn")).trim();
 

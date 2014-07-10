@@ -1,12 +1,7 @@
 package org.cathassist.bible;
 
-import android.app.ActivityManager;
-import android.app.AlarmManager;
 import android.app.Application;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -17,16 +12,16 @@ import android.widget.Toast;
 
 import com.umeng.analytics.MobclickAgent;
 
-import org.cathassist.bible.lib.Para;
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.Calendar;
-import java.util.Map;
 
 public class App extends Application implements Thread.UncaughtExceptionHandler {
     private static App thiz;
+
+    public App() {
+        thiz = this;
+    }
 
     public static App get() {
         if (thiz == null) {
@@ -35,13 +30,9 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
         return thiz;
     }
 
-    public App() {
-        thiz = this;
-    }
-
     @Override
     public void onCreate() {
-        super.onCreate(); 
+        super.onCreate();
         thiz = this;
         Thread.setDefaultUncaughtExceptionHandler(this);
     }
@@ -49,12 +40,7 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
         MobclickAgent.reportError(App.get(), "Uncaught Error:" + getExceptionCause(ex));
-        Toast.makeText(this,"很抱歉，圣经小助手出了点小问题:(",Toast.LENGTH_SHORT).show();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Toast.makeText(this, "很抱歉，圣经小助手出了点小问题:(", Toast.LENGTH_SHORT).show();
         /*
         SharedPreferences settings = getSharedPreferences(Para.STORE_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
@@ -64,7 +50,6 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
         editor.putLong("last_crash",nowTime.getTimeInMillis());
         editor.commit();
         */
-
         android.os.Process.killProcess(android.os.Process.myPid());
 
         /*
@@ -119,14 +104,14 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
         return (activeNetInfo != null && activeNetInfo.getType() == ConnectivityManager.TYPE_WIFI);
     }
 
-    public int getVersionCode(){
+    public int getVersionCode() {
         int code;
         try {
             code = getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
         } catch (PackageManager.NameNotFoundException e) {
             code = 0;
         }
-        return  code;
+        return code;
     }
 
     public String getVersionName() {

@@ -1,7 +1,5 @@
 package org.cathassist.bible.lib;
 
-import com.umeng.common.net.s;
-
 public class VerseInfo {
     public static final String[] CHN_NAME =
             {"", "创世纪", "出谷纪", "肋未纪", "户藉纪", "申命纪", "若苏厄书", "民长纪", "卢德传", "撒慕尔纪上",
@@ -41,7 +39,7 @@ public class VerseInfo {
                     3, 6, 4, 3, 1, 13, 5, 5, 3, 5,
                     1, 1, 1, 22};
 
-    public static final String[] BOOK_SCOPE = {"全书（创-默）","旧约（创-拉）","新约（玛-默）","梅瑟五书（创-申）","旧约史书（苏-加下）","智慧书（约-德）","大先知书（依-达）","小先知书（欧-拉）","四福音（玛-若）","教会历史（宗）","保禄书信（罗-费）","公函（希-犹）","若望默示录（默）"};
+    public static final String[] BOOK_SCOPE = {"全书（创-默）", "旧约（创-拉）", "新约（玛-默）", "梅瑟五书（创-申）", "旧约史书（苏-加下）", "智慧书（约-德）", "大先知书（依-达）", "小先知书（欧-拉）", "四福音（玛-若）", "教会历史（宗）", "保禄书信（罗-费）", "公函（希-犹）", "若望默示录（默）"};
 
     public static final int WHOLE_BOOK = 0;
     public static final int OLD_TESTAMENT = 1;
@@ -59,25 +57,25 @@ public class VerseInfo {
 
     public static int getBookType(int book) {
         int type = 0;
-        if(book >= 1 && book <= 5) {
+        if (book >= 1 && book <= 5) {
             type = PENTATEUCH;
-        } else if(book >= 6 && book <= 21) {
+        } else if (book >= 6 && book <= 21) {
             type = HISTORY;
-        } else if(book >= 22 && book <= 28) {
+        } else if (book >= 22 && book <= 28) {
             type = WISDOM_AND_POETRY;
-        } else if(book >= 29 && book <= 34) {
+        } else if (book >= 29 && book <= 34) {
             type = MAJOR_PROPHETS;
-        } else if(book >= 35 && book <= 46) {
+        } else if (book >= 35 && book <= 46) {
             type = MINOR_PROPHETS;
-        } else if(book >= 47 && book <= 50) {
+        } else if (book >= 47 && book <= 50) {
             type = GOSPELS;
-        } else if(book >= 51 && book <= 51) {
+        } else if (book >= 51 && book <= 51) {
             type = ACTS_OF_APOSTLES;
-        } else if(book >= 52 && book <= 64) {
+        } else if (book >= 52 && book <= 64) {
             type = PAULINE_EPISTLES;
-        } else if(book >= 65 && book <= 72) {
+        } else if (book >= 65 && book <= 72) {
             type = GENERAL_EPISTLES;
-        } else if(book >= 73 && book <= 73) {
+        } else if (book >= 73 && book <= 73) {
             type = APOCALYPTIC;
         }
         return type;

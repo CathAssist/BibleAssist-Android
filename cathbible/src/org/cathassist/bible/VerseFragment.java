@@ -13,16 +13,15 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
-import org.cathassist.bible.lib.Para;
-import org.cathassist.bible.lib.Database;
-import org.cathassist.bible.lib.Share;
-import org.cathassist.bible.lib.VerseInfo;
-import org.cathassist.bible.read.BibleReadFragment;
-
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.slidingmenu.lib.SlidingMenu;
+
+import org.cathassist.bible.lib.Database;
+import org.cathassist.bible.lib.Para;
+import org.cathassist.bible.lib.Share;
+import org.cathassist.bible.lib.VerseInfo;
 
 import java.util.Random;
 
@@ -38,7 +37,6 @@ public class VerseFragment extends SherlockFragment implements OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mActivity = (MainActivity) getSherlockActivity();
         mActionBar = mActivity.getSupportActionBar();
         mManager = mActivity.getSupportFragmentManager();
@@ -65,12 +63,12 @@ public class VerseFragment extends SherlockFragment implements OnClickListener {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
-        inflater.inflate(R.menu.verse_menu,menu);
+        inflater.inflate(R.menu.verse_menu, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.next:
                 GetVerse();
                 break;

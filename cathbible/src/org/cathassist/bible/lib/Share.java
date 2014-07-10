@@ -22,7 +22,7 @@ public class Share {
         SocializeConfig config = mController.getConfig();
         mController.setShareContent(content);
         config.setPlatformOrder(SHARE_MEDIA.SMS, SHARE_MEDIA.EMAIL, SHARE_MEDIA.SINA,
-                                SHARE_MEDIA.TENCENT, SHARE_MEDIA.QZONE);
+                SHARE_MEDIA.TENCENT, SHARE_MEDIA.QZONE);
         config.removePlatform(SHARE_MEDIA.RENREN, SHARE_MEDIA.DOUBAN);
         config.addCustomPlatform(getOtherTextShare(context, content));
         mController.openShare(context, false);

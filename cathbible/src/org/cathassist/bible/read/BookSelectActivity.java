@@ -26,7 +26,7 @@ import java.util.Map;
 public class BookSelectActivity extends SherlockActivity implements OnItemClickListener {
     ListView mList;
     GridView mGrid;
-    List<Map<String,String>> mData;
+    List<Map<String, String>> mData;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,9 +43,8 @@ public class BookSelectActivity extends SherlockActivity implements OnItemClickL
         SimpleAdapter adapter = new SimpleAdapter(this,
                 mData,
                 R.layout.book_select_item,
-                new String[] {"abbr","name"},
-                new int[] {R.id.abbr,R.id.name})
-        {
+                new String[]{"abbr", "name"},
+                new int[]{R.id.abbr, R.id.name}) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 ViewHolder holder;
@@ -108,11 +107,6 @@ public class BookSelectActivity extends SherlockActivity implements OnItemClickL
         mGrid.setOnItemClickListener(this);
     }
 
-    private static final class ViewHolder {
-        public TextView abbr;
-        public TextView name;
-    }
-
     @Override
     protected void onPause() {
         super.onPause();
@@ -146,9 +140,14 @@ public class BookSelectActivity extends SherlockActivity implements OnItemClickL
         for (int i = 1; i <= 73; i++) {
             Map<String, String> map = new HashMap<String, String>();
             map.put("name", VerseInfo.CHN_NAME[i]);
-            map.put("abbr",VerseInfo.CHN_ABBR[i]);
+            map.put("abbr", VerseInfo.CHN_ABBR[i]);
             data.add(map);
         }
         return data;
+    }
+
+    private static final class ViewHolder {
+        public TextView abbr;
+        public TextView name;
     }
 }
