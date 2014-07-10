@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    
+    <PreferenceCategory 
+        android:key="read_settings"
+        android:title="@string/user_center" >
+        
+        <PreferenceScreen 
+            android:key="click_version"
+            android:title="@string/version"
+            android:summary="软件版本：1.0" />
+        <PreferenceScreen
+            android:key="click_about_us"
+            android:title="@string/about_us"
+            android:summary="关于天主教小助手" />
+        <PreferenceScreen 
+            android:key="click_feedback"
+            android:title="@string/feedback" 
+            android:summary="提交软件错误反馈或建议" />
+        <!--
+        <PreferenceScreen 
+            android:key="click_share"
+            android:title="@string/share_settings" 
+            android:summary="分享到微博、空间设置"/>
+            -->
+        <PreferenceScreen
+            android:key="click_mp3_manage"
+            android:title="@string/mp3_manage_settings"
+            android:summary="圣经朗读Mp3音频批量管理" />
+        <PreferenceScreen
+            android:key="click_path_manage"
+            android:title="@string/path_manage_settings"
+            android:summary="下载路径设置及修改" />
+        <CheckBoxPreference  
+            android:key="auto_update"
+            android:title="@string/auto_update" 
+            android:summaryOn="打开自动检测更新"
+            android:summaryOff="关闭自动检测更新"
+            android:defaultValue="true" />
+        <CheckBoxPreference  
+            android:key="allow_gprs"
+            android:title="@string/allow_gprs" 
+            android:summaryOn="允许使用数据流量"
+            android:summaryOff="不允许使用数据流量"
+            android:defaultValue="false" />
+    </PreferenceCategory>
+      
+    <PreferenceCategory 
+        android:key="read_settings"
+        android:title="@string/read_settings" >            
+        <ListPreference             
+            android:key="font_size"
+            android:title="@string/font_size"
+            android:summary="选择合适的阅读字号"
+            android:defaultValue="18"
+            android:entryValues="@array/font_size_value" 
+            android:entries="@array/font_size_entry" 
+            android:dialogTitle="选择字号"/>
+        <CheckBoxPreference  
+            android:key="always_bright"
+            android:title="@string/always_bright" 
+            android:summaryOn="背景灯常亮"
+            android:summaryOff="背景灯随系统控制"
+            android:defaultValue="true" />
+        <CheckBoxPreference  
+            android:key="theme_black"
+            android:title="@string/theme_black" 
+            android:summaryOn="使用深色主题"
+            android:summaryOff="使用浅色主题"
+            android:defaultValue="false" />
+        <CheckBoxPreference  
+            android:key="show_color"
+            android:title="@string/show_color" 
+            android:summaryOn="高亮显示"
+            android:summaryOff="不高亮显示"
+            android:defaultValue="true" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

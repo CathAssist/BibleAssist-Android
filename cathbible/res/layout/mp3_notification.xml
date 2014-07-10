@@ -1,0 +1,72 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:orientation="horizontal">
+    <!-- 图标 -->
+    <ImageView android:id="@+id/noti_icon"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/ic_launcher"
+        android:padding="3dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="16sp"
+            android:singleLine="true"
+            android:padding="2dp"/>
+        <TextView android:id="@+id/noti_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:singleLine="true"
+            android:padding="2dp"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0">
+        <ImageButton
+            android:id="@+id/noti_prev"
+            android:src="@drawable/icon_prev"
+            android:background="@color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:clickable="true"/>
+        <!-- 播放暂停 -->
+        <ImageButton
+            android:id="@+id/noti_play"
+            android:src="@drawable/icon_play"
+            android:background="@color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/noti_prev"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:clickable="true"/>
+        <!-- 下一首 -->
+        <ImageButton
+            android:id="@+id/noti_next"
+            android:src="@drawable/icon_next"
+            android:background="@color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/noti_play"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:clickable="true"/>
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,8 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/manage"
+        android:orderInCategory="0"
+        android:showAsAction="always"
+        android:title="@string/download_manage"/>
+</menu>

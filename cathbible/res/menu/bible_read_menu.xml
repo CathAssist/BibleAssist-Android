@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/book"
+        android:orderInCategory="0"
+        android:showAsAction="always"
+        android:title="@string/book"/>
+    <item
+        android:id="@+id/chapter"
+        android:orderInCategory="1"
+        android:showAsAction="always"
+        android:title="@string/chapter"/>
+
+</menu>
