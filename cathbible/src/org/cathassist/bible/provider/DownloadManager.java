@@ -485,7 +485,7 @@ public class DownloadManager {
 	 * Control whether a system notification is posted by the download
 	 * manager while this download is running. If enabled, the download
 	 * manager posts notifications about downloads through the system
-	 * {@link org.cathassist.bible.provider.NotificationManager}. By default,
+	 * By default,
 	 * a notification is shown.
 	 * 
 	 * If set to false, this requires the permission

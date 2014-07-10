@@ -76,13 +76,7 @@ public class Mp3ManageDetailActivity extends SherlockActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     file.delete();
-                                    mMusicAdapter.notifyDataSetChanged();
-                                    new Handler().postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            Func.downChapter(mType, book, chapter);
-                                        }
-                                    }, 500);
+                                    Func.downChapter(mType, book, chapter);
                                 }
                             }).setNegativeButton(R.string.cancel, null).show();
                 } else {
