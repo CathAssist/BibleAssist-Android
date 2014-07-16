@@ -1,8 +1,10 @@
 package org.cathassist.bible.lib;
 
+import android.os.Environment;
 import android.os.StatFs;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -42,7 +44,14 @@ public class PathScan {
         // some mount files don't list the default
         // path first, so we add it here to
         // ensure that it is first in our list
-        mMounts.add("/mnt/sdcard");
+        try {
+            mMounts.add("/mnt/sdcard");
+            if (!mMounts.contains(Environment.getExternalStorageDirectory().getCanonicalPath())) {
+                mMounts.add(Environment.getExternalStorageDirectory().getCanonicalPath());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         try {
             Scanner scanner = new Scanner(new File("/proc/mounts"));
@@ -54,13 +63,17 @@ public class PathScan {
 
                     // don't add the default mount path
                     // it's already in the list.
-                    if (!element.equals("/mnt/sdcard"))
-                        mMounts.add(element);
+                    try {
+                        String path = new File(element).getCanonicalPath();
+                        if (!mMounts.contains(path))
+                            mMounts.add(element);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         } catch (Exception e) {
             // Auto-generated catch block
-
             e.printStackTrace();
         }
     }
@@ -80,6 +93,13 @@ public class PathScan {
         // includes the path to the first sdcard, whether real
         // or emulated.
         mVold.add("/mnt/sdcard");
+        try {
+            if (!mVold.contains(Environment.getExternalStorageDirectory().getCanonicalPath())) {
+                mVold.add(Environment.getExternalStorageDirectory().getCanonicalPath());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         try {
             Scanner scanner = new Scanner(new File("/system/etc/vold.fstab"));
@@ -94,13 +114,17 @@ public class PathScan {
 
                     // don't add the default vold path
                     // it's already in the list.
-                    if (!element.equals("/mnt/sdcard"))
-                        mVold.add(element);
+                    try {
+                        String path = new File(element).getCanonicalPath();
+                        if (!mVold.contains(path))
+                            mVold.add(element);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         } catch (Exception e) {
             // Auto-generated catch block
-
             e.printStackTrace();
         }
     }
@@ -119,7 +143,6 @@ public class PathScan {
             if (!mVold.contains(mount))
                 mMounts.remove(i--);
         }
-
         // don't need this anymore, clear the vold list to reduce memory
         // use and to prepare it for the next time it's needed.
         mVold.clear();
@@ -131,7 +154,6 @@ public class PathScan {
          * sure it's a valid and available path. If it is not, remove it from
          * the list.
          */
-
         for (int i = 0; i < mMounts.size(); i++) {
             String mount = mMounts.get(i);
             File root = new File(mount);
@@ -149,7 +171,8 @@ public class PathScan {
         mLabels = new ArrayList<String>();
         for (String s : mMounts) {
             StatFs stat = new StatFs(s);
-            mLabels.add(String.valueOf((long) stat.getAvailableBlocks() * stat.getBlockSize() / 1024 / 1024));
+            mLabels.add("剩余：" + (((long) stat.getAvailableBlocks()) * stat.getBlockSize() / 1024 / 1024) + "MB，" +
+                    "共计：" + (((long)stat.getBlockCount()) * stat.getBlockSize() / 1024 / 1024) + "MB");
         }
 
         /*

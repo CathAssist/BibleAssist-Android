@@ -1,7 +1,10 @@
 package org.cathassist.bible;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
@@ -23,6 +27,8 @@ import com.actionbarsherlock.view.MenuItem;
 import com.slidingmenu.lib.SlidingMenu;
 
 import org.cathassist.bible.lib.Database;
+import org.cathassist.bible.lib.Fragments;
+import org.cathassist.bible.lib.Func;
 import org.cathassist.bible.lib.Para;
 import org.cathassist.bible.lib.Share;
 import org.cathassist.bible.lib.VerseInfo;
@@ -92,6 +98,12 @@ public class HomeFragment extends SherlockFragment implements OnClickListener {
             File newFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/cathbible/bible/mp3/chn_female");
             file.renameTo(newFile);
         }
+        file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + Para.ROOT_PATH);
+        if(file.exists()) {
+            String[] params = new String[]{Environment.getExternalStorageDirectory().getAbsolutePath() + Para.ROOT_PATH,
+                    Environment.getExternalStorageDirectory().getAbsolutePath() + Para.NEW_ROOT_PATH};
+            new CopyFolderTask(mActivity).execute(params);
+        }
         return view;
     }
 
@@ -138,7 +150,7 @@ public class HomeFragment extends SherlockFragment implements OnClickListener {
                     mActivity.getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
                     mActivity.getMusicPlayService().stop();
                     fragTrans = mManager.beginTransaction();
-                    fragTrans.replace(R.id.content_frame, org.cathassist.bible.lib.FragmentManager.bibleReadFragment);
+                    fragTrans.replace(R.id.content_frame, Fragments.bibleReadFragment);
                     fragTrans.commit();
                 }
                 break;
@@ -153,7 +165,7 @@ public class HomeFragment extends SherlockFragment implements OnClickListener {
                     mActivity.getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
                     mActivity.getMusicPlayService().stop();
                     fragTrans = mManager.beginTransaction();
-                    fragTrans.replace(R.id.content_frame, org.cathassist.bible.lib.FragmentManager.bibleReadFragment);
+                    fragTrans.replace(R.id.content_frame, Fragments.bibleReadFragment);
                     fragTrans.commit();
                 }
                 break;
@@ -168,7 +180,7 @@ public class HomeFragment extends SherlockFragment implements OnClickListener {
                     mActivity.getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
                     mActivity.getMusicPlayService().stop();
                     fragTrans = mManager.beginTransaction();
-                    fragTrans.replace(R.id.content_frame, org.cathassist.bible.lib.FragmentManager.bibleReadFragment);
+                    fragTrans.replace(R.id.content_frame, Fragments.bibleReadFragment);
                     fragTrans.commit();
                 }
                 break;
@@ -335,6 +347,47 @@ public class HomeFragment extends SherlockFragment implements OnClickListener {
             }
             if (db != null) {
                 db.close();
+            }
+        }
+    }
+
+    class CopyFolderTask extends AsyncTask<String, Void, Boolean> {
+        ProgressDialog dialog;
+        Context mContext;
+
+        public CopyFolderTask(Context context) {
+            mContext = context;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            dialog = new ProgressDialog(mContext);
+            dialog.setMessage("正在迁移数据，请不要关闭软件");
+            dialog.setCancelable(false);
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+            if (dialog != null && dialog.isShowing()) {
+                dialog.dismiss();
+            }
+            if (result) {
+                Toast.makeText(mActivity, "数据迁移完成", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(mActivity, "数据迁移失败，请尝试手动迁移", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        protected Boolean doInBackground(String... params) {
+            if (Func.copyFolder(params[0], params[1])) {
+                Func.deleteFolder(params[0]);
+                return true;
+            } else {
+                return false;
             }
         }
     }

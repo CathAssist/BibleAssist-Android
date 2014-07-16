@@ -2,6 +2,7 @@ package org.cathassist.bible.lib;
 
 import android.graphics.Color;
 
+import org.cathassist.bible.App;
 import org.cathassist.bible.R;
 import org.cathassist.bible.music.MusicPlayService;
 
@@ -35,9 +36,13 @@ public class Para {
             "http://media.cathassist.org/bible/mp3/cn/female/",
             "http://media.cathassist.org/bible/mp3/cn/male/"};
     public static final String ROOT_PATH = "/cathbible";
+    public static final String NEW_ROOT_PATH = "/Android/data/" + App.get().getPackageName() + "/files";
     public static final String[] BIBLE_MP3_PATH = {
             "/cathbible/bible/mp3/chn_female/",
             "/cathbible/bible/mp3/chn_male/"};
+    public static final String[] NEW_BIBLE_MP3_PATH = {
+            "/Android/data/" + App.get().getPackageName() + "/files/bible/mp3/chn_female/",
+            "/Android/data/" + App.get().getPackageName() + "/files/bible/mp3/chn_male/"};
     public static final String[] BIBLE_MP3_VERSION = {
             "思高版女声",
             "思高版男声"};

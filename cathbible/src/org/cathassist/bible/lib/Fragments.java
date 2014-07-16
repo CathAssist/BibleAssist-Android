@@ -6,7 +6,7 @@ import org.cathassist.bible.VerseFragment;
 import org.cathassist.bible.mark.MarkFragment;
 import org.cathassist.bible.read.BibleReadFragment;
 
-public class FragmentManager {
+public class Fragments {
     public static HomeFragment homeFragment;
     public static BibleReadFragment bibleReadFragment;
     public static MarkFragment markFragment;

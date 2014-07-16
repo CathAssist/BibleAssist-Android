@@ -18,6 +18,7 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.slidingmenu.lib.SlidingMenu;
 
+import org.cathassist.bible.lib.Fragments;
 import org.cathassist.bible.lib.Para;
 import org.cathassist.bible.setting.SettingActivity;
 
@@ -72,7 +73,7 @@ public class NavFragment extends SherlockFragment implements OnItemClickListener
                     mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
                     mActivity.getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
                     FragmentTransaction fragTrans = mManager.beginTransaction();
-                    mFragment = org.cathassist.bible.lib.FragmentManager.homeFragment;
+                    mFragment = Fragments.homeFragment;
                     fragTrans.replace(R.id.content_frame, mFragment);
                     fragTrans.commit();
                 }
@@ -85,7 +86,7 @@ public class NavFragment extends SherlockFragment implements OnItemClickListener
                     mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
                     mActivity.getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
                     FragmentTransaction fragTrans = mManager.beginTransaction();
-                    mFragment = org.cathassist.bible.lib.FragmentManager.bibleReadFragment;
+                    mFragment = Fragments.bibleReadFragment;
                     fragTrans.replace(R.id.content_frame, mFragment);
                     fragTrans.commit();
                 }
@@ -98,7 +99,7 @@ public class NavFragment extends SherlockFragment implements OnItemClickListener
                     mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
                     mActivity.getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
                     FragmentTransaction fragTrans = mManager.beginTransaction();
-                    mFragment = org.cathassist.bible.lib.FragmentManager.markFragment;
+                    mFragment = Fragments.markFragment;
                     fragTrans.replace(R.id.content_frame, mFragment);
                     fragTrans.commit();
                 }
@@ -111,7 +112,7 @@ public class NavFragment extends SherlockFragment implements OnItemClickListener
                     mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
                     mActivity.getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
                     FragmentTransaction fragTrans = mManager.beginTransaction();
-                    mFragment = org.cathassist.bible.lib.FragmentManager.verseFragment;
+                    mFragment = Fragments.verseFragment;
                     fragTrans.replace(R.id.content_frame, mFragment);
                     fragTrans.commit();
                 }
@@ -123,7 +124,7 @@ public class NavFragment extends SherlockFragment implements OnItemClickListener
                     mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
                     mActivity.getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
                     FragmentTransaction fragTrans = mManager.beginTransaction();
-                    mFragment = org.cathassist.bible.lib.FragmentManager.searchFragment;
+                    mFragment = Fragments.searchFragment;
                     fragTrans.replace(R.id.content_frame, mFragment);
                     fragTrans.commit();
                 }

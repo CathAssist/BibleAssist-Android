@@ -19,6 +19,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.slidingmenu.lib.SlidingMenu;
 
 import org.cathassist.bible.lib.Database;
+import org.cathassist.bible.lib.Fragments;
 import org.cathassist.bible.lib.Para;
 import org.cathassist.bible.lib.Share;
 import org.cathassist.bible.lib.VerseInfo;
@@ -96,7 +97,7 @@ public class VerseFragment extends SherlockFragment implements OnClickListener {
                     mActivity.getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
                     mActivity.getMusicPlayService().stop();
                     fragTrans = mManager.beginTransaction();
-                    fragTrans.replace(R.id.content_frame, org.cathassist.bible.lib.FragmentManager.bibleReadFragment);
+                    fragTrans.replace(R.id.content_frame, Fragments.bibleReadFragment);
                     fragTrans.commit();
                 }
                 break;

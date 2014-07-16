@@ -82,7 +82,7 @@ public class PathManageActivity extends SherlockActivity implements AdapterView.
         String oldPath = Para.downPath;
 
         if (!TextUtils.isEmpty(path) && !TextUtils.isEmpty(oldPath) && !path.equals(oldPath)) {
-            String[] params = new String[]{oldPath + Para.ROOT_PATH, path + Para.ROOT_PATH};
+            String[] params = new String[]{oldPath + Para.NEW_ROOT_PATH, path + Para.NEW_ROOT_PATH};
             new CopyFolderTask(this).execute(params);
 
             Para.downPath = path;
@@ -132,7 +132,7 @@ public class PathManageActivity extends SherlockActivity implements AdapterView.
 
             vh.path.setText(mMount.get(position));
             vh.path.setChecked(mMount.get(position).equals(Para.downPath));
-            vh.label.setText("剩余空间：" + mLabel.get(position) + "MB");
+            vh.label.setText(mLabel.get(position));
 
             return convertView;
         }

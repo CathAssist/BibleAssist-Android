@@ -41,7 +41,7 @@ public class Mp3ManageActivity extends SherlockActivity implements AdapterView.O
         mListView.setOnItemClickListener(this);
         mListView.setOnItemLongClickListener(this);
 
-        Toast.makeText(this, "长按选择默认音频版本", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "长按选择默认音频版本", Toast.LENGTH_SHORT).show();
     }
 
     @Override

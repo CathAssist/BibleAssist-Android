@@ -21,7 +21,7 @@ import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.FeedbackAgent;
 import com.umeng.update.UmengUpdateAgent;
 
-import org.cathassist.bible.lib.FragmentManager;
+import org.cathassist.bible.lib.Fragments;
 import org.cathassist.bible.lib.Func;
 import org.cathassist.bible.lib.Para;
 import org.cathassist.bible.music.MusicPlayService;
@@ -42,7 +42,7 @@ public class MainActivity extends SlidingFragmentActivity implements ServiceConn
         setTheme(Para.THEME);
         Func.InitTheme();
         loadLast();
-        FragmentManager.initFragments();
+        Fragments.initFragments();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_content);
 
@@ -57,9 +57,9 @@ public class MainActivity extends SlidingFragmentActivity implements ServiceConn
         Intent intent = getIntent();
         SherlockFragment fragment;
         if ("BIBLE_READ_FRAGMENT".equals(intent.getAction())) {
-            fragment = FragmentManager.bibleReadFragment;
+            fragment = Fragments.bibleReadFragment;
         } else {
-            fragment = FragmentManager.homeFragment;
+            fragment = Fragments.homeFragment;
         }
 
         mActionBar = getSupportActionBar();

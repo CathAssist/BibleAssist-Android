@@ -20,6 +20,7 @@ import com.slidingmenu.lib.SlidingMenu;
 import org.cathassist.bible.MainActivity;
 import org.cathassist.bible.R;
 import org.cathassist.bible.lib.Database;
+import org.cathassist.bible.lib.Fragments;
 import org.cathassist.bible.lib.Para;
 
 import java.util.ArrayList;
@@ -76,7 +77,7 @@ public class MarkFragment extends SherlockFragment implements OnItemClickListene
         mActivity.getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
         mActivity.getMusicPlayService().stop();
         fragTrans = mManager.beginTransaction();
-        fragTrans.replace(R.id.content_frame, org.cathassist.bible.lib.FragmentManager.bibleReadFragment);
+        fragTrans.replace(R.id.content_frame, Fragments.bibleReadFragment);
         fragTrans.commit();
     }
 

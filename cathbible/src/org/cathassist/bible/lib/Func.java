@@ -76,7 +76,7 @@ public class Func {
 
     public static String getdownPath() {
         File file = new File(Para.downPath);
-        if (file.exists()) {
+        if (file.exists() && file.isDirectory() && file.canWrite()) {
             return Para.downPath;
         } else {
             return Environment.getExternalStorageDirectory().getAbsolutePath();
@@ -85,7 +85,7 @@ public class Func {
 
     public static File getFilePath(int type, String name) {
         File file;
-        file = new File(getdownPath() + Para.BIBLE_MP3_PATH[type] + name);
+        file = new File(getdownPath() + Para.NEW_BIBLE_MP3_PATH[type] + name);
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
         }
@@ -153,7 +153,7 @@ public class Func {
             }
             Toast.makeText(App.get(), "下载已添加", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(App.get(), "下载失败\n请在WIFI环境下再下载\n或在设置中打开使用数据流量选项", Toast.LENGTH_LONG).show();
+            Toast.makeText(App.get(), "下载失败\n请在WIFI环境下再下载\n或在设置中打开使用数据流量选项", Toast.LENGTH_SHORT).show();
         }
     }
 

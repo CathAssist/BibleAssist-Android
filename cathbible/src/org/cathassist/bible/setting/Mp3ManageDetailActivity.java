@@ -151,7 +151,7 @@ public class Mp3ManageDetailActivity extends SherlockActivity {
         }
         mMusicAdapter = new MusicManagementAdapter(this);
         mExpandableListView.setAdapter(mMusicAdapter);
-        Toast.makeText(this, "长按书卷名,下载该卷全部音频", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "长按书卷名,下载该卷全部音频", Toast.LENGTH_SHORT).show();
     }
 
     @Override
